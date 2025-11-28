@@ -1,0 +1,13 @@
+const express=require('express');
+const {protect,restrictTo}=require('../middleware/authMiddleware');
+const {getme,createUser,getAllUsers,getUserById,updateUser,deleteUser,changePassword}=require('../controllers/userController');
+const router=express.Router();
+router.use(protect);
+router.get("/me",protect,getme);
+router.get("/",restrictTo("administrator"),getAllUsers);
+router.get("/:id",getUserById);
+router.post("/create",restrictTo("administrator"),createUser);
+router.patch("/update/:id",restrictTo("staff","administrator","placement-coordinator"),updateUser);
+router.patch("/changepassword",changePassword);
+router.delete("/:id",restrictTo("administrator"),deleteUser);
+module.exports=router;

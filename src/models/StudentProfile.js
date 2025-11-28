@@ -1,0 +1,32 @@
+const mongoose=require('mongoose');
+const studentProfileSchema=new mongoose.Schema({
+    userID:{type:mongoose.Schema.Types.ObjectId,ref:"User",required:true},
+    name:{
+        type:String,required:true
+    },
+    email:{
+        type:String,required:true,unique:true
+    },
+    phone:{
+        type:String,required:true,unique:true
+    },
+    degree:{
+        type:String,required:true
+    },
+    course:{
+        type:String,required:true
+    },
+    currentCGPA:{
+        type:Number,required:true
+    },
+    passOutYear:{
+        type:Number,required:true
+    },
+    resumeURL:{
+        type:String,required:true
+    },
+    isApproved:{
+        type:Boolean,default:false
+    }
+},{timestamps:true});
+module.exports=mongoose.model("StudentProfile",studentProfileSchema);
